@@ -444,6 +444,7 @@ launch.json
 ldspits
 lee303
 Leonhardt
+Libera.Chat
 libicu
 libpsl
 libpsl-native
@@ -1068,6 +1069,39 @@ MultipleServiceCommandBase.AllServices
 JustinGrote
 Newtonsoft.Json
 minSize
+WGs
+wg-definitions
+thejasonhelmick
+winps
+componentization
+CimCmdlets
+Microsoft.PowerShell.Host
+PSDiagnostics
+nightlies
+wg
+Visio
+triaged
+lifecycle
+v2.0.5
+mutex
+gukoff
+dinhngtu
+globbed
+octos4murai
+PSCommand
+System.Management.Automation.ICommandRuntime
+AppDomain.CreateDomain
+AppDomain.Unload
+ProcessModule.FileName
+Environment.ProcessPath
+PSUtils.GetMainModule
+schuelermine
+SupportsShouldProcess
+Start-PSBootstrap
+DotnetMetadataRuntime.json
+deps.json
+Jaykul
+eltociear
  - CHANGELOG.md
 aavdberg
 asrosent
@@ -1304,9 +1338,26 @@ powershell.config.json
 romero126
 boolean
 rtm.20526.5
-
+dbaileyut
+un-localized
+awakecoding
+bcwood
+ThrowTerminatingError
+DoesNotReturn
+GetValueOrDefault
+PSLanguageMode
+adamsitnik
+msixbundle
+PowerShell-Native#70
+AppxManifest.xml
  - CHANGELOG/7.0.md
 codesign
 release-BuildJson
 yml
 centos-7
+ - test/perf/benchmarks/README.md
+benchmarked
+BenchmarkDotNet
+ - docs/community/working-group-definitions.md
+TobiasPSP
+jdhitsolutions

@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
+using System.Collections.Generic;
+
 namespace System.Management.Automation
 {
     #region OutputRendering
@@ -34,7 +36,7 @@ namespace System.Management.Automation
         /// <summary>Classic rendering of progress.</summary>
         Classic = 1,
     }
-
+    
     #region PSStyle
     /// <summary>
     /// Contains configuration for how PowerShell renders text.
@@ -308,6 +310,11 @@ namespace System.Management.Automation
             public string FormatAccent { get; set; } = "\x1b[32;1m";
 
             /// <summary>
+            /// Gets or sets the style for table headers.
+            /// </summary>
+            public string TableHeader { get; set; } = "\x1b[32;1m";
+
+            /// <summary>
             /// Gets or sets the accent style for errors.
             /// </summary>
             public string ErrorAccent { get; set; } = "\x1b[36;1m";
@@ -331,6 +338,55 @@ namespace System.Management.Automation
             /// Gets or sets the style for debug messages.
             /// </summary>
             public string Debug { get; set; } = "\x1b[33;1m";
+        }
+
+        /// <summary>
+        /// Contains formatting styles for FileInfo objects.
+        /// </summary>
+        public sealed class FileInfoFormatting
+        {
+            /// <summary>
+            /// Gets or sets the style for directories.
+            /// </summary>
+            public string Directory { get; set; } = "\x1b[44;1m";
+
+            /// <summary>
+            /// Gets or sets the style for symbolic links.
+            /// </summary>
+            public string SymbolicLink { get; set; } = "\x1b[36;1m";
+
+            /// <summary>
+            /// Gets or sets the style for executables.
+            /// </summary>
+            public string Executable { get; set; } = "\x1b[32;1m";
+
+            /// <summary>
+            /// Gets the style for archive.
+            /// </summary>
+            public Dictionary<string, string> Extension { get; }
+
+            /// <summary>
+            /// Initializes a new instance of the <see cref="FileInfoFormatting"/> class.
+            /// </summary>
+            public FileInfoFormatting()
+            {
+                Extension = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+                // archives
+                Extension.Add(".zip", "\x1b[31;1m");
+                Extension.Add(".tgz", "\x1b[31;1m");
+                Extension.Add(".gz", "\x1b[31;1m");
+                Extension.Add(".tar", "\x1b[31;1m");
+                Extension.Add(".nupkg", "\x1b[31;1m");
+                Extension.Add(".cab", "\x1b[31;1m");
+                Extension.Add(".7z", "\x1b[31;1m");
+
+                // powershell
+                Extension.Add(".ps1", "\x1b[33;1m");
+                Extension.Add(".psd1", "\x1b[33;1m");
+                Extension.Add(".psm1", "\x1b[33;1m");
+                Extension.Add(".ps1xml", "\x1b[33;1m");
+            }
         }
 
         /// <summary>
@@ -444,6 +500,11 @@ namespace System.Management.Automation
         /// </summary>
         public BackgroundColor Background { get; }
 
+        /// <summary>
+        /// Gets FileInfo colors.
+        /// </summary>
+        public FileInfoFormatting FileInfo { get; }
+
         private static readonly PSStyle s_psstyle = new PSStyle();
 
         private PSStyle()
@@ -452,6 +513,7 @@ namespace System.Management.Automation
             Progress   = new ProgressConfiguration();
             Foreground = new ForegroundColor();
             Background = new BackgroundColor();
+            FileInfo = new FileInfoFormatting();
         }
 
         /// <summary>
